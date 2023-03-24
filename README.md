@@ -15,6 +15,6 @@ The Notebook files contain code to apply these methods to the data acquired by t
     - Making density plots.
   These variables are further explained in the notebooks.
   
- This is an example density plot, which gives information on the usage of both hands. This can be intresting because it might so discrepancies between arm usage.
+ This is an example density plot, which gives information on the usage of both hands. This can be intresting because it might show discrepancies between arm usage.
  
  ![density_plot](https://user-images.githubusercontent.com/90693914/227542445-78068e3b-a6ee-41b2-a089-c3d13c83cab7.png)
