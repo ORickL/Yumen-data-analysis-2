@@ -13,4 +13,6 @@ The Notebook files contain code to apply these methods to the data acquired by t
     - Magnitude ratio.
     - Bilateral magnitude.
     - Making density plots.
-
+  These variables are further explained in the notebooks.
+  
+ 
