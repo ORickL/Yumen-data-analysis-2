@@ -22,3 +22,9 @@ The Notebook files contain code to apply these methods to the data acquired by t
 This is an example from the 2d_plots.ipynb notebook. A top view with artifically made coordinates in a circle around an image of a person. 
 
 ![Top_view](https://user-images.githubusercontent.com/90693914/227559584-fa98c59c-0c18-4d42-b1ba-bfdc19ae4230.png)
+
+
+TO-DO's:
+- Make a python API script to utilize all the data processing described in the notebooks.
+- Make all the data visualisations more visually appealing.
+
