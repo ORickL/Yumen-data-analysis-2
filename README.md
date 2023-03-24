@@ -17,4 +17,8 @@ The Notebook files contain code to apply these methods to the data acquired by t
   
  This is an example density plot, which gives information on the usage of both hands. This can be intresting because it might show discrepancies between arm usage.
  
- ![density_plot](https://user-images.githubusercontent.com/90693914/227542445-78068e3b-a6ee-41b2-a089-c3d13c83cab7.png)
+![density_plot](https://user-images.githubusercontent.com/90693914/227542445-78068e3b-a6ee-41b2-a089-c3d13c83cab7.png)
+
+This is an example from the 2d_plots.ipynb notebook. A top view with artifically made coordinates in a circle around an image of a person. 
+
+![Top_view](https://user-images.githubusercontent.com/90693914/227559584-fa98c59c-0c18-4d42-b1ba-bfdc19ae4230.png)
