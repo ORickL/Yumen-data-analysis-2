@@ -29,5 +29,5 @@ This distribution plot shows on the x-axis the magnitude ratio (close to -7 and 
 
 TO-DO's:
 - Make all the data visualisations more visually appealing. X
-- Remove start/end times and user from dataprocessor.py, The correct data should be pulled using correct SQL queries and can then be input into these scripts. 
+- Remove start/end times and user from dataprocessor.py, The correct data should be pulled using correct SQL queries and can then be input into these scripts. Reasoning behind this: You want to pull a specific portion of the SQL database and do something with that. Instead of pulling everything and then selecting the start and end time after that.
 
