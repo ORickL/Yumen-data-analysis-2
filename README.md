@@ -24,6 +24,11 @@ This is an example from the 2d_plots.ipynb notebook. A top view with artifically
 ![Top_view](https://user-images.githubusercontent.com/90693914/227559584-fa98c59c-0c18-4d42-b1ba-bfdc19ae4230.png)
 
 
+These are results from the python API using data collected from our sensor system.
+![activity comparison](https://user-images.githubusercontent.com/90693914/231167934-27a9a7cd-65d5-429b-92ee-d00fd9ac2016.png)
+![displot_activity](https://user-images.githubusercontent.com/90693914/231167988-83a74770-9177-46e3-98c8-a776de133945.png)
+
+
 TO-DO's:
 - Make a python API script to utilize all the data processing described in the notebooks.
 - Make all the data visualisations more visually appealing.
