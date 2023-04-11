@@ -41,6 +41,9 @@ def get_acceleration(df, dt, x, y, z):
 
 
 def calculate_vector_magnitude(x, y, z):
+    '''
+    Simple function to return the vector magnitude from x, y, z acceleration signals.
+    '''
     return np.sqrt(x**2 + y**2, z**2)
 
 def calculate_hours_of_use(vector_magnitude, threshold=0.1, dt=1):
@@ -66,32 +69,46 @@ def calculate_magnitude_ratio(vector_magnitude_left, vector_magnitude_right):
     
     return np.clip(magnitude_ratio, a_min=-7, a_max=7)
 
+
 def calculate_bilateral_magnitude(vector_magnitude_left, vector_magnitude_right):
+    '''
+    Function to calculate the bilateral magnitude from two vector magnitudes.
+    Returns a value for each timepoint which indicates the intensity of the movement.
+    '''
     return np.sum((vector_magnitude_left, vector_magnitude_right), axis=0)
 
 
 def calculate_elbow_angles(shoulder, elbow, wrist, upper_arm_length, forearm_length):
-    # Initialize lists for storing timeseries data
+    '''
+    Calculate elbow angles from shoulder, elbow and wrist positional data.
+    '''
     angles = []
     upper_arm_vectors = []
     forearm_vectors = []
     for i in range(len(shoulder)):
-        # Calculate vectors representing upper arm and forearm
         upper_arm_vector = [elbow[i][0] - shoulder[i][0],
                             elbow[i][1] - shoulder[i][1], 
                             elbow[i][2] - shoulder[i][2]]
         forearm_vector = [wrist[i][0] - elbow[i][0], 
                           wrist[i][1] - elbow[i][1], 
                           wrist[i][2] - elbow[i][2]]
-        # Store vectors in list for debugging purposes
+        
         upper_arm_vectors.append(upper_arm_vector)
         forearm_vectors.append(forearm_vector)
-        # Calculate dot product of upper arm and forearm vectors
         dot_product = upper_arm_vector[0] * forearm_vector[0] + upper_arm_vector[1] * forearm_vector[1] + upper_arm_vector[2] * forearm_vector[2]
-        # Calculate angle between upper arm and forearm vectors using law of cosines
-        angle = math.acos(dot_product / (upper_arm_length * forearm_length))
-        # Convert angle from radians to degrees
+
+        try:
+            angle = math.acos(dot_product / (upper_arm_length * forearm_length))
+        except:
+            angle = 180 # this will happen when the value in acos is <-1 or >1
         angle_degrees = 180 - math.degrees(angle)
-        # Append the angle to the list
         angles.append(angle_degrees)
     return angles
+    
+
+def movement_against_gravity(acc_z):
+    '''
+    Short idea note: 
+    Implement a function to check when the acceleration signal on the z-axis is positive (motion against gravity).
+    Then calculate a variable as for example total time where movements were against gravity (or % movements against gravity during minute/hour). 
+    '''

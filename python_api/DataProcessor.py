@@ -60,11 +60,25 @@ class DataProcessor():
 
     # function to make a density plot out of the magnitude ratio and bilateral magnitude -> visualizes the activity of each arm (assymetry in figure means assymerty in usage)
     def density_plot(self):
-        sns.displot(x=self.magnitude_ratio, y=self.bilateral_magnitude, cbar=True, cmap='plasma')
+        sns.displot(x=-1*self.magnitude_ratio, y=self.bilateral_magnitude, binwidth=(0.5, 10) ,cbar=True, cmap='plasma')
         plt.xlabel('Magnitude ratio')
         plt.ylabel('Bilateral magnitude')
+        plt.xlim((-8, 8))
         plt.show()
     
+    def magnitude_histogram(self, arm, scale):
+        if arm == 'l':
+            plt.hist(self.left_vector_magnitude, bins=20)
+        if arm == 'r':
+            plt.hist(self.right_vector_magnitude, bins=20) 
+        plt.yscale(scale)  # Set y-axis to logarithmic scale
+        plt.xlabel('Magnitude')  # Add x-axis label
+        plt.ylabel(f'Frequency ({scale} scale)')  # Add y-axis label
+        plt.title('Magnitude Histogram')  # Add title
+        plt.ylim((0, 10**2))
+        plt.xlim((0, 60))
+        plt.show()
+
 
 class DataViz():
     '''
@@ -72,6 +86,7 @@ class DataViz():
     '''
     def __init__(self, data_path):
         self.data = pd.read_csv(data_path)
+        self.data.dropna(how='any', inplace=True)
 
     def plot_2d(self, view, arm):
         '''
@@ -95,15 +110,15 @@ class DataViz():
 
         if view == 'top':
             hull = ConvexHull(np.column_stack((x, y)))
-            ax.scatter(x, y*-1, alpha=0.05)
+            ax.scatter(x, y, alpha=0.05)
             img = imread('images/top_view.jpg', format='gray')
             if arm == 'r':
                 ax.imshow(img, cmap='gray', extent=(-88, img.shape[1]-88, -155, img.shape[0]-155))
             elif arm == 'l':
                 ax.imshow(img, cmap='gray', extent=(-317, img.shape[1]-317, -155, img.shape[0]-155))
             for simplex in hull.simplices:
-                ax.plot(x[simplex], -1*y[simplex], 'k-', lw=5, alpha=0.5)
-            ax.fill(x[hull.vertices], -1*y[hull.vertices], 'b', alpha=0.05)
+                ax.plot(x[simplex], y[simplex], 'k-', lw=5, alpha=0.5)
+            ax.fill(x[hull.vertices], y[hull.vertices], 'b', alpha=0.05)
         elif view == 'front':
             hull = ConvexHull(np.column_stack((x, z)))
             ax.scatter(x, z, alpha=0.05)
@@ -116,8 +131,8 @@ class DataViz():
                 ax.plot(x[simplex], z[simplex], 'k-', lw=5, alpha=0.5)
             ax.fill(x[hull.vertices], z[hull.vertices], 'b', alpha=0.05)
         elif view == 'side':
-            hull = ConvexHull(np.column_stack((y, z)), qhull_options=...)
-            ax.scatter(y, z, alpha=0.05)
+            hull = ConvexHull(np.column_stack((y, z)))
+            ax.scatter(-1*y, z, alpha=0.05)
             if arm == 'r':
                 img = imread('images/side_view_right.jpg')
                 ax.imshow(img, cmap='gray', extent=(-131, img.shape[1]-131, -364, img.shape[0]-364))
@@ -125,13 +140,15 @@ class DataViz():
                 img = imread('images/side_view_left.jpg')
                 ax.imshow(img, cmap='gray', extent=(-131, img.shape[1]-131, -364, img.shape[0]-364))
             for simplex in hull.simplices:
-                ax.plot(y[simplex], z[simplex], 'k-', lw=5, alpha=0.5)
-            ax.fill(y[hull.vertices], z[hull.vertices], 'b', alpha=0.05)
+                ax.plot(-1*y[simplex], z[simplex], 'k-', lw=5, alpha=0.5)
+            ax.fill(-1*y[hull.vertices], z[hull.vertices], 'b', alpha=0.05)
 
         else:
             print('view must be either top, front or side!')
         plt.show()
 
-processor = DataProcessor(data_path='03-17.csv', user='G0004')
-Visualiser = DataViz(data_path='fri_test_31-03.csv')
-Visualiser.plot_2d(view='top', arm='r')
+processor = DataProcessor(data_path='test_data/left_active_right_inactive.csv', user=1234, threshold=0.2, dt=0.5)
+processor.density_plot()
+
+#Visualiser = DataViz(data_path='test_data/left_active_right_inactive.csv')
+#Visualiser.plot_2d(view='side', arm='r')
