@@ -15,21 +15,19 @@ The Notebook files contain code to apply these methods to the data acquired by t
     - Making density plots.
   These variables are further explained in the notebooks.
   
- This is an example density plot, which gives information on the usage of both hands. This can be intresting because it might show discrepancies between arm usage.
- 
-![density_plot](https://user-images.githubusercontent.com/90693914/227542445-78068e3b-a6ee-41b2-a089-c3d13c83cab7.png)
-
-This is an example from the 2d_plots.ipynb notebook. A top view with artifically made coordinates in a circle around an image of a person. 
-
-![Top_view](https://user-images.githubusercontent.com/90693914/227559584-fa98c59c-0c18-4d42-b1ba-bfdc19ae4230.png)
-
+There are example plots (2d plots and density plots) in the /images folder.
 
 These are results from the python API using data collected from our sensor system.
+
+Activity comparison (low activity in the top images and high activity in the bottom images).
+The histogram to the right show a higher frequency of low vector magnitudes in the low activity data.
 ![activity comparison](https://user-images.githubusercontent.com/90693914/231167934-27a9a7cd-65d5-429b-92ee-d00fd9ac2016.png)
+
+This distribution plot shows on the x-axis the magnitude ratio (close to -7 and 7 means high contribution of the left and right arm respectively) and on the y-axis the bilateral magnitude (a measure of the intensity of a movement for both arms combined).
 ![displot_activity](https://user-images.githubusercontent.com/90693914/231167988-83a74770-9177-46e3-98c8-a776de133945.png)
 
 
 TO-DO's:
-- Make a python API script to utilize all the data processing described in the notebooks.
-- Make all the data visualisations more visually appealing.
+- Make all the data visualisations more visually appealing. X
+- Remove start/end times and user from dataprocessor.py, The correct data should be pulled using correct SQL queries and can then be input into these scripts. 
 
